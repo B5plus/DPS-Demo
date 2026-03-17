@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DPS International Ghana — Cambridge International School in Community 25, Tema. World-class education from Pre-Primary to A-Level & IBDP.">
+<meta property="og:title" content="DPS International Ghana">
+<meta property="og:description" content="Cambridge International School — Excellence in Education Since 2010">
+<meta property="og:type" content="website">
+<title>DPS International Ghana — Cambridge International School</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ── ACCESSIBILITY ── -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+
+<!-- ── SCROLL PROGRESS ── -->
+<div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+
+<!-- Social sidebar removed — replaced by footer social icons -->
+
+<!-- ── WHATSAPP FLOAT ── -->
+<button class="wa-btn" onclick="window.open('https://wa.me/233556620540','_blank')" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9 9 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.85L.054 24l6.306-1.654A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0"/></svg>
+  <span class="wa-tooltip">Chat on WhatsApp</span>
+</button>
+
+<!-- ── AI CHATBOT ── -->
+<div class="ai-fab" id="aiFab" aria-live="polite">
+  <div class="ai-window" id="aiWindow" role="dialog" aria-label="DPS AI Assistant">
+    <div class="ai-header">
+      <div class="ai-av"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="20" height="20" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg></div>
+      <div class="ai-header-text">
+        <strong>DPS AI Assistant</strong>
+        <span>Ask anything about admissions, fees, curriculum...</span>
+      </div>
+      <button class="ai-close" onclick="toggleAI()" aria-label="Close AI assistant">✕</button>
+    </div>
+    <div class="ai-messages" id="aiMessages">
+      <div class="ai-msg bot">👋 Hello! I'm the DPS Ghana AI Assistant. I can help you with admissions, fees, programmes, facilities, and more. What would you like to know?</div>
+    </div>
+    <div class="ai-quick-replies" id="aiQuickReplies">
+      <button class="ai-qr" onclick="sendQuick('How do I apply for admission?')">Admissions</button>
+      <button class="ai-qr" onclick="sendQuick('What programmes do you offer?')">Programmes</button>
+      <button class="ai-qr" onclick="sendQuick('What are the school fees?')">Fees</button>
+      <button class="ai-qr" onclick="sendQuick('Where is the school located?')">Location</button>
+    </div>
+    <div class="ai-input-row">
+      <input class="ai-input" id="aiInput" type="text" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendAI()" aria-label="Type your question">
+      <button class="ai-send" onclick="sendAI()" aria-label="Send message">➤</button>
+    </div>
+  </div>
+  <button class="ai-btn" onclick="toggleAI()" aria-label="Open AI assistant" aria-expanded="false" id="aiToggleBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" width="26" height="26" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="15" x2="8" y2="15" stroke-width="3"/><line x1="12" y1="15" x2="12" y2="15" stroke-width="3"/><line x1="16" y1="15" x2="16" y2="15" stroke-width="3"/></svg>
+    <div class="ai-pulse"></div>
+  </button>
+</div>
+
+<!-- ── SEARCH OVERLAY ── -->
+<div class="search-overlay" id="searchOverlay" role="search" aria-label="Site search">
+  <div class="search-box">
+    <div class="search-input-wrap">
+      <input type="search" id="searchInput" placeholder="Search for programmes, facilities, news..." autofocus aria-label="Search DPS Ghana website" oninput="handleSearch(this.value)">
+      <button class="search-close" onclick="toggleSearch()" aria-label="Close search">✕</button>
+    </div>
+    <div class="search-results" id="searchResults">
+      <div class="sr-item"><span class="sr-icon">🎓</span> Cambridge IGCSE Programme</div>
+      <div class="sr-item"><span class="sr-icon">📚</span> AS & A Level</div>
+      <div class="sr-item"><span class="sr-icon">🌱</span> Cambridge Pre-Primary</div>
+      <div class="sr-item"><span class="sr-icon">🏊</span> Swimming Pool Facility</div>
+      <div class="sr-item"><span class="sr-icon">🏆</span> Achievements 2025</div>
+      <div class="sr-item"><span class="sr-icon">📋</span> Admissions Process</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MOBILE NAV OVERLAY ── -->
+<div class="mob-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
+
+<!-- ── MOBILE DRAWER ── -->
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+  <button class="mob-close" onclick="closeMobileNav()" aria-label="Close menu">✕</button>
+  <div class="mob-item" onclick="toggleMobSub('whyus')">
+    Why Us <span id="whyus-ch">▼</span>
+  </div>
+  <div class="mob-sub" id="mob-whyus">
+    <div class="mob-sub-item"><span>📌</span> Our Mission & Vision</div>
+    <div class="mob-sub-item"><span>🏛️</span> Genesis of DPS</div>
+    <div class="mob-sub-item"><span>📖</span> History</div>
+    <div class="mob-sub-item"><span>🏆</span> Achievements</div>
+    <div class="mob-sub-item"><span>🏫</span> Facilities</div>
+  </div>
+  <div class="mob-item" onclick="toggleMobSub('team')">
+    Meet Our Team <span id="team-ch">▼</span>
+  </div>
+  <div class="mob-sub" id="mob-team">
+    <div class="mob-sub-item"><span>👨‍💼</span> His Excellency</div>
+    <div class="mob-sub-item"><span>👔</span> Director</div>
+    <div class="mob-sub-item"><span>👩‍💼</span> Principal</div>
+    <div class="mob-sub-item"><span>👩‍🏫</span> Staff</div>
+  </div>
+  <div class="mob-item">Alumni</div>
+  <div class="mob-item" onclick="toggleMobSub('depts')">
+    Departments <span id="depts-ch">▼</span>
+  </div>
+  <div class="mob-sub" id="mob-depts">
+    <div class="mob-sub-item"><span>🌱</span> Cambridge Pre-Primary</div>
+    <div class="mob-sub-item"><span>📚</span> Cambridge Primary</div>
+    <div class="mob-sub-item"><span>🔬</span> Cambridge Lower Secondary</div>
+    <div class="mob-sub-item"><span>🎓</span> Cambridge IGCSE</div>
+    <div class="mob-sub-item"><span>⭐</span> AS & A Level</div>
+  </div>
+  <div class="mob-item" onclick="toggleMobSub('gallery')">
+    Gallery <span id="gallery-ch">▼</span>
+  </div>
+  <div class="mob-sub" id="mob-gallery">
+    <div class="mob-sub-item"><span>📰</span> News</div>
+    <div class="mob-sub-item"><span>🎭</span> School Activities</div>
+    <div class="mob-sub-item"><span>📸</span> Gallery</div>
+  </div>
+  <div class="mob-item" onclick="toggleMobSub('circulars')">
+    Circulars & Notices <span id="circulars-ch">▼</span>
+  </div>
+  <div class="mob-sub" id="mob-circulars">
+    <div class="mob-sub-item"><span>📅</span> Annual Schedule</div>
+    <div class="mob-sub-item"><span>📋</span> Circulars</div>
+  </div>
+  <div class="mob-item">Contact Us</div>
+  <div style="padding:20px 24px;">
+    <button class="btn-apply" style="width:100%;padding:13px;font-size:14px;border-radius:10px;">Apply Now →</button>
+  </div>
+</nav>
+
+<!-- ── TOP BAR ── -->
+<div class="topbar" role="banner">
+  <div class="tb-inner">
+    <div class="tb-left">
+      <a href="tel:+233556620540" aria-label="Call us">📞 +233 55 662 0540</a>
+      <a href="/cdn-cgi/l/email-protection#e0b092898e838990818ca08490938788818e81ce858495ce8788" aria-label="Email us">✉️ <span class="__cf_email__" data-cfemail="6737150e09040e17060b27031714000f0609064902031249000f">[email&#160;protected]</span></a>
+    </div>
+    <div class="tb-right">
+      <a href="#" class="erp-pill" aria-label="ERP Login">👤 ERP Login</a>
+      <select class="lang-sel" aria-label="Select language">
+        <option>🌐 English</option>
+        <option>🌐 Français</option>
+      </select>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav id="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-wrap">
+    <a href="#" class="logo" aria-label="DPS International Ghana Home">
+      <div class="logo-crest" role="img" aria-label="DPS Logo">DPS</div>
+      <div class="logo-txt">
+        <strong>DPS International Ghana</strong>
+        <span>Cambridge International School</span>
+      </div>
+    </a>
+    <ul class="nav-menu" role="menubar">
+      <li class="nav-item" role="none">
+        <button class="nav-lnk" role="menuitem" aria-haspopup="true" aria-expanded="false">Why Us <span class="chevron">▼</span></button>
+        <div class="dropdown" role="menu">
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📌</span>Our Mission & Vision</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🏛️</span>Genesis of DPS</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📖</span>History</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🏆</span>Achievements</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🏫</span>Facilities</span>
+        </div>
+      </li>
+      <li class="nav-item" role="none">
+        <button class="nav-lnk" role="menuitem" aria-haspopup="true">Meet Our Team <span class="chevron">▼</span></button>
+        <div class="dropdown" role="menu">
+          <span class="d-item" role="menuitem"><span class="d-item-icon">👨‍💼</span>His Excellency</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">👔</span>Director</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">👩‍💼</span>Principal</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">👩‍🏫</span>Staff</span>
+        </div>
+      </li>
+      <li class="nav-item" role="none"><button class="nav-lnk" role="menuitem">Alumni</button></li>
+      <li class="nav-item" role="none">
+        <button class="nav-lnk" role="menuitem" aria-haspopup="true">Departments <span class="chevron">▼</span></button>
+        <div class="dropdown" role="menu">
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🌱</span>Cambridge Pre-Primary</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📚</span>Cambridge Primary</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🔬</span>Cambridge Lower Secondary</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🎓</span>Cambridge IGCSE</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">⭐</span>AS & A Level</span>
+        </div>
+      </li>
+      <li class="nav-item" role="none">
+        <button class="nav-lnk" role="menuitem" aria-haspopup="true">Gallery <span class="chevron">▼</span></button>
+        <div class="dropdown" role="menu">
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📰</span>News</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">🎭</span>School Activities</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📸</span>Gallery</span>
+        </div>
+      </li>
+      <li class="nav-item" role="none">
+        <button class="nav-lnk" role="menuitem" aria-haspopup="true">Circulars & Notices <span class="chevron">▼</span></button>
+        <div class="dropdown" role="menu">
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📅</span>Annual Schedule</span>
+          <span class="d-item" role="menuitem"><span class="d-item-icon">📋</span>Circulars</span>
+        </div>
+      </li>
+      <li class="nav-item" role="none"><button class="nav-lnk" role="menuitem">Contact Us</button></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-search-btn" onclick="toggleSearch()" aria-label="Search site">🔍</button>
+      <button class="btn-apply" aria-label="Apply for admission">Apply Now</button>
+      <button class="hamburger" id="hamburger" onclick="openMobileNav()" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO SLIDER ═══ -->
+<main id="main-content">
+<section class="hero" aria-label="Hero slider" role="banner">
+  <div class="hero-slides" id="slides" aria-live="polite">
+
+    <!-- SLIDE 1 -->
+    <div class="slide slide-1" role="group" aria-label="Slide 1 of 3">
+      <div class="slide-video" aria-hidden="true">
+        <iframe
+          src="https://www.youtube.com/embed/DpIcipz3nag?autoplay=1&mute=1&controls=0&loop=1&playlist=DpIcipz3nag&playsinline=1&rel=0&modestbranding=1"
+          title="DPS International Ghana hero video"
+          frameborder="0"
+          allow="autoplay; encrypted-media; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          tabindex="-1">
+        </iframe>
+      </div>
+      <div class="slide-content">
+        <div class="slide-tag">Cambridge International School</div>
+        <h1>Your Kids Deserve<br><em>The Best Education</em></h1>
+        <p>DPS International offers programmes to develop your kids' natural desire to learn — from Pre-Primary through to A-Levels and IBDP.</p>
+        <div class="slide-btns">
+          <button class="btn-sp">Apply for Admission</button>
+          <button class="btn-ss">Explore Programmes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide slide-2" role="group" aria-label="Slide 2 of 3">
+      <div class="slide-visual sv-s2" aria-hidden="true"></div>
+      <div class="slide-content">
+        <div class="slide-tag">Service Beyond Self</div>
+        <h1>Excellence in<br><em>Every Classroom</em></h1>
+        <p>State-of-the-art smart classrooms, cutting-edge laboratories and world-class sports facilities — all within our Community 25 campus.</p>
+        <div class="slide-btns">
+          <button class="btn-sp">Explore Facilities</button>
+          <button class="btn-ss">Virtual Tour</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide slide-3" role="group" aria-label="Slide 3 of 3">
+      <div class="slide-visual sv-s3" aria-hidden="true"></div>
+      <div class="slide-content">
+        <div class="slide-tag">Innovative Institution of the Year 2025</div>
+        <h1>Building Ghana's<br><em>Future Leaders</em></h1>
+        <p>Recognised by the Ghana Business & Innovation Awards — DPS International Ghana shapes the next generation of global citizens.</p>
+        <div class="slide-btns">
+          <button class="btn-sp">Our Achievements</button>
+          <button class="btn-ss">Meet Our Team</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="slide-dots" role="tablist" aria-label="Slide navigation">
+    <button class="dot active" onclick="goSlide(0)" role="tab" aria-label="Go to slide 1" aria-selected="true"></button>
+    <button class="dot" onclick="goSlide(1)" role="tab" aria-label="Go to slide 2" aria-selected="false"></button>
+    <button class="dot" onclick="goSlide(2)" role="tab" aria-label="Go to slide 3" aria-selected="false"></button>
+  </div>
+  <div class="slide-arrows">
+    <button class="arrow" onclick="prevSlide()" aria-label="Previous slide">←</button>
+    <button class="arrow" onclick="nextSlide()" aria-label="Next slide">→</button>
+  </div>
+
+  <!-- Slide progress bar -->
+  <div class="slide-progress" aria-hidden="true">
+    <div class="slide-progress-fill" id="slideProgress"></div>
+  </div>
+
+  <!-- Stats strip — FIXED: proper data-target attributes -->
+  <div class="hero-stats" aria-label="School statistics">
+    <div class="hs-item"><div class="hs-num" data-target="2010" id="stat1">2010</div><div class="hs-lbl">Established Since</div></div>
+    <div class="hs-item"><div class="hs-num" data-target="1200" data-suffix="+" id="stat2">0</div><div class="hs-lbl">Students Enrolled</div></div>
+    <div class="hs-item"><div class="hs-num" data-target="120" data-suffix="+" id="stat3">0</div><div class="hs-lbl">Qualified Teachers</div></div>
+    <div class="hs-item"><div class="hs-num" data-target="98" data-suffix="%" id="stat4">0</div><div class="hs-lbl">University Placement</div></div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT STRIP ═══ -->
+<section class="about-strip" aria-label="About DPS International Ghana">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-img-block reveal left">
+        <div class="about-main-img" role="img" aria-label="DPS International Ghana campus">🏫</div>
+        <div class="about-badge">
+          <div class="ab-icon" aria-hidden="true">🏆</div>
+          <div class="ab-text">
+            <strong>15+ Years</strong>
+            <span>of Excellence</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="reveal d1">
+          <div class="sec-tag">About DPS International Ghana</div>
+          <h2 class="sec-title">Best Facilities For Your<br>Kids And Students</h2>
+        </div>
+        <div class="about-motto reveal d2">
+          <p>"Service Beyond Self"</p>
+          <span>Our School Motto — guiding us since 2010</span>
+        </div>
+        <p class="sec-sub reveal d3" style="margin-bottom:22px;">DPSI Ghana commenced in the year 2010, aiming for quality education and learning for excellence, providing holistic, modern and comprehensive education beginning from Creche class through A-Level — integrating technology-driven classrooms.</p>
+        <p class="sec-sub reveal d4" style="margin-bottom:26px;">With <strong style="color:var(--g1);">'Service Beyond Self'</strong> as the motto, DPSI Tema caters to the needs of children of Ghana and neighbouring countries — offering a truly international learning environment.</p>
+        <div class="about-pills reveal d5">
+          <span class="pill">Cambridge Accredited</span>
+          <span class="pill">IB World School</span>
+          <span class="pill">GES Registered</span>
+          <span class="pill">50+ Nationalities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AI SECTION ═══ -->
+<section class="ai-banner" aria-label="AI Assistant features">
+  <div class="container">
+    <div class="ai-banner-inner">
+      <div class="ai-banner-text reveal left">
+        <div class="sec-tag" style="color:var(--gold-l);">Powered by AI</div>
+        <h2>Meet Your DPS<br><em>AI School Assistant</em></h2>
+        <p>Get instant answers about admissions, fees, curriculum, facilities and school life — available 24/7, no waiting, no phone queues.</p>
+        <div class="ai-features">
+          <div class="ai-feat"><div class="ai-feat-icon">💬</div> Instant answers to admissions questions</div>
+          <div class="ai-feat"><div class="ai-feat-icon">📅</div> Check term dates & school calendar</div>
+          <div class="ai-feat"><div class="ai-feat-icon">🎓</div> Explore Cambridge & IBDP programmes</div>
+          <div class="ai-feat"><div class="ai-feat-icon">🚌</div> Find your transport route</div>
+        </div>
+        <button class="btn-try-ai" onclick="toggleAI()" style="margin-top:24px;">🤖 Try the AI Assistant</button>
+      </div>
+      <div class="reveal right">
+        <div class="ai-chat-preview">
+          <div style="font-size:11px;color:rgba(255,255,255,.4);text-align:center;margin-bottom:14px;text-transform:uppercase;letter-spacing:.08em;">Live Preview</div>
+          <div class="ai-preview-msg">👋 How can I help you today? Ask me anything about DPS Ghana!</div>
+          <div class="ai-preview-user" style="margin-left:auto;">What age does my child need to be for Pre-Primary?</div>
+          <div class="ai-preview-msg">Our Cambridge Pre-Primary accepts children from <strong>age 3 to 5 years</strong>. It's a play-based learning environment focused on curiosity and creativity. Shall I help you start an application?</div>
+          <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="ai-qr" onclick="sendQuick('Tell me more about Pre-Primary admission')">Yes, start application</button>
+            <button class="ai-qr" onclick="sendQuick('What are the fees?')">Ask about fees</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FACILITIES ═══ -->
+<section class="section facilities" aria-label="School facilities">
+  <div class="container">
+    <div class="sec-hd c">
+      <div class="reveal">
+        <div class="sec-tag">World-Class Campus</div>
+        <h2 class="sec-title">Our Facilities</h2>
+        <p class="sec-sub">Every learning space at DPS Ghana is designed to inspire, equip and challenge students to reach their full potential.</p>
+      </div>
+    </div>
+    <!-- FIXED: Removed invalid group: CSS property -->
+    <div class="fac-grid">
+      <div class="fac-card reveal d1">
+        <div class="fac-img fi-1">🏛️<span class="fac-lbl">Infrastructure</span></div>
+        <div class="fac-body">
+          <h3>Infrastructure</h3>
+          <p>DPS Tema is an architectural masterpiece in Ghana. Spacious classrooms with adequate ventilation, natural lighting and smart board technology.</p>
+          <span class="read-more">Read More →</span>
+        </div>
+      </div>
+      <div class="fac-card reveal d2">
+        <div class="fac-img fi-2">📺<span class="fac-lbl">Smart Classroom</span></div>
+        <div class="fac-body">
+          <h3>Smart Classroom</h3>
+          <p>Technology-driven classrooms with well-fitted smart boards compassing the world within the four walls, making learning joyful and interactive.</p>
+          <span class="read-more">Read More →</span>
+        </div>
+      </div>
+      <div class="fac-card reveal d3">
+        <div class="fac-img fi-3">🔬<span class="fac-lbl">Laboratories</span></div>
+        <div class="fac-body">
+          <h3>Laboratories</h3>
+          <p>At DPSI, we provide access to fully equipped, well-stocked and furnished laboratories with upgraded scientific instruments.</p>
+          <span class="read-more">Read More →</span>
+        </div>
+      </div>
+      <div class="fac-card reveal d4">
+        <div class="fac-img fi-4">💻<span class="fac-lbl">Computer Lab</span></div>
+        <div class="fac-body">
+          <h3>Computer Lab</h3>
+          <p>DPSI has two state-of-the-art computer labs accessible to students, faculty and staff with high-speed broadband internet connectivity.</p>
+          <span class="read-more">Read More →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INFRASTRUCTURE GALLERY ═══ -->
+<section class="section infra" aria-label="Campus infrastructure gallery">
+  <div class="container">
+    <div class="sec-hd c">
+      <div class="reveal">
+        <div class="sec-tag">Our Campus</div>
+        <h2 class="sec-title">Explore Our Infrastructure</h2>
+        <p class="sec-sub">A world-class campus in the heart of Tema — built to inspire excellence every day.</p>
+      </div>
+    </div>
+    <div class="infra-grid">
+      <div class="infra-item reveal left">
+        <div class="infra-bg ib-1"></div>
+        <div class="infra-overlay"><span class="zoom-icon" style="font-style:normal;">&#10010;</span></div>
+        <div class="infra-lbl">Campus</div>
+      </div>
+      <div class="infra-item reveal d1">
+        <div class="infra-bg ib-2"></div>
+        <div class="infra-overlay"><span class="zoom-icon" style="font-style:normal;">&#10010;</span></div>
+        <div class="infra-lbl">School Campus</div>
+      </div>
+      <div class="infra-item reveal d2">
+        <div class="infra-bg ib-3"></div>
+        <div class="infra-overlay"><span class="zoom-icon" style="font-style:normal;">&#10010;</span></div>
+        <div class="infra-lbl">School Building</div>
+      </div>
+      <div class="infra-item reveal d3">
+        <div class="infra-bg ib-4"></div>
+        <div class="infra-overlay"><span class="zoom-icon" style="font-style:normal;">&#10010;</span></div>
+        <div class="infra-lbl">Class Room</div>
+      </div>
+      <div class="infra-item reveal d4">
+        <div class="infra-bg ib-5"></div>
+        <div class="infra-overlay"><span class="zoom-icon" style="font-style:normal;">&#10010;</span></div>
+        <div class="infra-lbl">Play Area</div>
+      </div>
+    </div>
+    </div>
+    <div style="text-align:center;margin-top:36px;" class="reveal">
+      <button class="btn-solid" style="padding:13px 40px;font-size:14px;border-radius:50px;background:var(--g2);color:#fff;border:none;cursor:pointer;transition:var(--t);font-weight:700;" onmouseover="this.style.background='var(--g1)'" onmouseout="this.style.background='var(--g2)'">View More</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ACHIEVEMENTS + NEWS ═══ -->
+<section class="section ach-news" aria-label="Achievements and news">
+  <div class="container">
+    <div class="an-layout">
+      <div>
+        <div class="section-head-line reveal left">
+          <h2>Our Achievements</h2>
+          <div class="shl-line"></div>
+        </div>
+        <div class="ach-card reveal d1">
+          <div class="ach-img">🏆<div class="ach-badge">2025 AWARD</div></div>
+          <div class="ach-body">
+            <p class="ach-date">📅 April 29, 2025</p>
+            <h3>Innovative Educational Institution of the Year — 2025</h3>
+            <p>DPS International Ghana is proud to be recognised as the Innovative Educational Institution of the Year 2025 by the Ghana Business and Innovation Awards.</p>
+            <span class="read-more">Read More →</span>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:24px;" class="reveal d2">
+          <button style="padding:11px 32px;background:var(--g2);color:#fff;border:none;border-radius:50px;font-size:13.5px;font-weight:700;cursor:pointer;transition:var(--t);" onmouseover="this.style.background='var(--g1)'" onmouseout="this.style.background='var(--g2)'">View All Achievements</button>
+        </div>
+      </div>
+      <div>
+        <div class="section-head-line reveal right">
+          <h2>News & Events</h2>
+          <div class="shl-line"></div>
+        </div>
+        <div class="reveal d1">
+          <div class="event-card">
+            <div class="ev-date"><div class="day">20</div><div class="month">Feb</div></div>
+            <div class="event-info"><h4>BUSINESS CUP CHALLENGE 2026</h4><span>📅 February 20, 2026</span></div>
+          </div>
+          <div class="event-card">
+            <div class="ev-date"><div class="day">27</div><div class="month">Sep</div></div>
+            <div class="event-info"><h4>IB DIPLOMA PROGRAMME ADMISSION OPEN</h4><span>📅 September 27, 2025</span></div>
+          </div>
+          <div class="event-card">
+            <div class="ev-date"><div class="day">15</div><div class="month">Mar</div></div>
+            <div class="event-info"><h4>CAMBRIDGE IGCSE REGISTRATION DEADLINE</h4><span>📅 March 15, 2026</span></div>
+          </div>
+          <div class="event-card">
+            <div class="ev-date"><div class="day">01</div><div class="month">Apr</div></div>
+            <div class="event-info"><h4>ANNUAL SPORTS DAY 2026</h4><span>📅 April 1, 2026</span></div>
+          </div>
+        </div>
+        <div style="margin-top:20px;" class="reveal d2">
+          <button style="padding:11px 32px;background:var(--g2);color:#fff;border:none;border-radius:50px;font-size:13.5px;font-weight:700;cursor:pointer;transition:var(--t);" onmouseover="this.style.background='var(--g1)'" onmouseout="this.style.background='var(--g2)'">View All News</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ENROLL SECTION ═══ -->
+<section class="enroll" aria-label="Enrollment form">
+  <div class="container enroll-inner">
+    <div class="enroll-head reveal">
+      <h2>ENROLL TO THE BEST SCHOOL</h2>
+      <div class="enroll-divider"></div>
+      <p>Give your child the world-class education they deserve — right here in Ghana</p>
+    </div>
+    <div class="enroll-form reveal d2" id="enrollForm">
+      <div class="ef-full">
+        <input class="ef-input" id="ef-phone" type="tel" placeholder="Mobile No. *" aria-label="Mobile number" oninput="validateField(this,'phone')">
+        <div class="ef-error-msg">Please enter a valid phone number</div>
+      </div>
+      <div class="ef-row">
+        <div>
+          <input class="ef-input" id="ef-first" type="text" placeholder="First Name *" aria-label="First name" oninput="validateField(this,'name')">
+          <div class="ef-error-msg">First name is required</div>
+        </div>
+        <div>
+          <input class="ef-input" id="ef-last" type="text" placeholder="Last Name *" aria-label="Last name" oninput="validateField(this,'name')">
+          <div class="ef-error-msg">Last name is required</div>
+        </div>
+      </div>
+      <div class="ef-row">
+        <div>
+          <input class="ef-input" id="ef-age" type="number" placeholder="Child's Age *" min="3" max="18" aria-label="Child's age" oninput="validateField(this,'age')">
+          <div class="ef-error-msg">Age must be between 3 and 18</div>
+        </div>
+        <div>
+          <select class="ef-input" id="ef-class" aria-label="Select class">
+            <option value="">— Select Class —</option>
+            <option>Cambridge Pre-Primary (Age 3–5)</option>
+            <option>Cambridge Primary (Age 5–11)</option>
+            <option>Cambridge Lower Secondary (Age 11–14)</option>
+            <option>Cambridge IGCSE (Age 14–16)</option>
+            <option>AS & A Level (Age 16–18)</option>
+            <option>IBDP (Age 16–18)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-enroll" onclick="submitEnroll()" id="enrollBtn">Submit Application →</button>
+      <div class="form-success" id="enrollSuccess">
+        ✅ Thank you! Your application has been submitted. Our admissions team will contact you within 24 hours.
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer style="background:#0B1A30;font-family:'Inter',sans-serif;">
+
+  <!-- MAIN LINKS SECTION -->
+  <div style="max-width:1280px;margin:0 auto;padding:64px 60px 52px;display:grid;grid-template-columns:240px 1fr;gap:72px;align-items:start;">
+
+    <!-- LEFT: Logo + tagline + contact -->
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#2E7D32,#43A047);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:800;color:#fff;border:2px solid rgba(201,168,76,.4);flex-shrink:0;">DPS</div>
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;line-height:1.2;">DPS International</div>
+          <div style="font-size:9.5px;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.07em;">Cambridge School, Ghana</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:rgba(255,255,255,.42);line-height:1.8;margin-bottom:22px;">Providing world-class Cambridge &amp; IB education in Ghana since 2010.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <a href="tel:+233556620540" style="font-size:12.5px;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:7px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(255,255,255,.45)'">📞 +233 55 662 0540</a>
+        <a href="mailto:Principal@dpsghana.edu.gh" style="font-size:12.5px;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:7px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(255,255,255,.45)'">✉️ Principal@dpsghana.edu.gh</a>
+        <a href="https://maps.google.com/?q=DPS+International+Ghana" target="_blank" style="font-size:12.5px;color:rgba(255,255,255,.45);text-decoration:none;display:flex;align-items:center;gap:7px;" onmouseover="this.style.color='#C9A84C'" onmouseout="this.style.color='rgba(255,255,255,.45)'">📍 Community 25, Tema, Ghana</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: 4 link columns -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;">
+
+      <!-- Campus Life -->
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px;letter-spacing:.01em;">Campus Life</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>School Activities</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Sports &amp; PE</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Boarding House</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Gallery</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>News &amp; Events</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Alumni Network</a></li>
+        </ul>
+      </div>
+
+    
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px;letter-spacing:.01em;">Our Campus</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Infrastructure</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Smart Classrooms</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Laboratories</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Library &amp; Resources</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Swimming Pool</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>School Transport</a></li>
+        </ul>
+      </div>
+
+
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px;letter-spacing:.01em;">Academics</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Cambridge Pre-Primary</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Cambridge Primary</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Lower Secondary</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Cambridge IGCSE</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>AS &amp; A Level</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>IBDP</a></li>
+        </ul>
+      </div>
+
+      <!-- Information For -->
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:#fff;margin-bottom:20px;letter-spacing:.01em;">Information For</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>How to Apply</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Dates &amp; Deadlines</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Support &amp; Guidance</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Circulars &amp; Notices</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>Faculty &amp; Staff</a></li>
+          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,.5);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color .18s;" onmouseover="this.style.color='#4CAF50'" onmouseout="this.style.color='rgba(255,255,255,.5)'"><span style="color:#2E7D32;font-size:13px;font-weight:700;">›</span>ERP Portal Login</a></li>
+        </ul>
+      </div>
+
+    </div><!-- /4 cols -->
+  </div><!-- /main grid -->
+
+  <!-- DIVIDER LINE -->
+  <div style="border-top:1px solid rgba(255,255,255,.08);position:relative;">
+    <!-- Centered graduation cap icon — exactly like reference -->
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:#2E7D32;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px #0B1A30,0 0 0 8px rgba(46,125,50,.3);z-index:2;">
+      <svg width="28" height="28" viewBox="0 0 64 64" fill="white">
+        <path d="M32 8 L60 22 L32 36 L4 22 Z"/>
+        <path d="M18 28 L18 44 Q32 52 46 44 L46 28"/>
+        <line x1="60" y1="22" x2="60" y2="38" stroke="white" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="60" cy="40" r="3" fill="white"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- BOTTOM GREEN BAR — exactly like reference -->
+  <div style="background:#2E7D32;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:1px;">
+    <p style="font-size:13px;color:rgba(255,255,255,.8);">Copyright &copy; DPS International Ghana, All rights reserved.</p>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <a href="#" style="font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Privacy Policy</a>
+      <a href="#" style="font-size:13px;color:rgba(255,255,255,.75);text-decoration:none;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.75)'">Disclaimer</a>
+      <!-- Social icons in bottom bar — like reference -->
+      <div style="display:flex;gap:8px;margin-left:8px;">
+        <a href="https://www.facebook.com" target="_blank" style="width:34px;height:34px;border-radius:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'" title="Facebook">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.instagram.com" target="_blank" style="width:34px;height:34px;border-radius:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'" title="Instagram">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://twitter.com" target="_blank" style="width:34px;height:34px;border-radius:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'" title="Twitter / X">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="https://wa.me/233556620540" target="_blank" style="width:34px;height:34px;border-radius:6px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.28)'" onmouseout="this.style.background='rgba(255,255,255,.15)'" title="WhatsApp">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a9.87 9.87 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
+
+
